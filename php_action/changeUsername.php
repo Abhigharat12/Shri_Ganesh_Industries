@@ -16,8 +16,8 @@ if($_POST) {
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;
 		$valid['messages'] = "Successfully Update";
-		header('location:../setting.php');		
-	} 
+		header('location:../dashboard.php');
+	}
 	else {
 		$valid['success'] = false;
 		$valid['messages'] = "Error while updating product info";

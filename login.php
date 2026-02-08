@@ -34,13 +34,18 @@ if(isset($_POST["login"])) {
     $result = $connect->query($sql);
 
     if($result->num_rows == 1) {
-      $password = md5($password);
-     
-      $mainSql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-      $mainResult = $connect->query($mainSql);
+      $value = $result->fetch_assoc();
+      $storedPassword = $value['password'];
 
-      if($mainResult->num_rows == 1) {
-        $value = $mainResult->fetch_assoc();
+      // Check if password is hashed (starts with $) or MD5
+      $passwordValid = false;
+      if (substr($storedPassword, 0, 1) === '$') {
+        $passwordValid = password_verify($password, $storedPassword);
+      } else {
+        $passwordValid = md5($password) === $storedPassword;
+      }
+
+      if($passwordValid) {
         $user_id = $value['user_id'];
 
         // set session
@@ -84,7 +89,7 @@ if(isset($_POST["login"])) {
     <h3 class="popup__content__title">
       Error 
     </h1>
-    <p>Username doesnot exists</p>
+    <p>Username does not exists</p>
     <p>
       <a href="login.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
     </p>
@@ -108,7 +113,7 @@ if(isset($_POST["login"])) {
                     <div class="col-md-4 mx-auto">
                         <div class="login-content ">
                             <div class="login-form">
-                                <center><img src="./assets/uploadImage/Logo/logo.jpg" style="max-width:250px;height:auto;margin:0 auto 20px;display:block;"></center>
+                                <center><img src="./assets/uploadImage/Logo/favicon.png" style="max-width:250px;height:auto;margin:0 auto 20px;display:block;"></center>
                                 <?php if(!empty($errors)) { ?>
                                     <div class="alert alert-danger">
                                         <ul class="mb-0">

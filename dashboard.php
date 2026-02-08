@@ -271,7 +271,7 @@ $conversionRate = ($countlead > 0) ? round(($countclosedlead / $countlead) * 100
 
 
      <div class="col-md-12">
-<div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #e3e3e6 0%, #ded9e6 100%); color: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+<div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); color: #343a40; transition: transform 0.3s ease, box-shadow 0.3s ease;">
                             <div class="card-header" style="background: linear-gradient(135deg, #7ebdf1 0%, #18a7ef 100%); color: #fff; border: none;">
                                 <strong class="card-title">New Leads</strong>
                             </div>
@@ -279,20 +279,20 @@ $conversionRate = ($countlead > 0) ? round(($countclosedlead / $countlead) * 100
                                 <div class="card-body p-4">
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-hover table-striped">
-                                        <thead>
+                                        <thead style="color: blue;">
                                             <tr>
                                               <th>#</th>
-                            <th>Lead Name</th>
-                            <th>Phone</th>                           
-                            <th>Email </th>
-                            <th>City</th>
-                            <th>Interested In</th>
-                            <th>Source</th>
+                            <th><i class="ti-user"></i> Lead Name</th>
+                            <th><i class="ti-mobile"></i> Phone</th>
+                            <th><i class="ti-email"></i> Email</th>
+                            <th><i class="ti-location-pin"></i> City</th>
+                            <th><i class="ti-heart"></i> Interested In</th>
+                            <th><i class="ti-share"></i> Source</th>
                           
                                                 
                                             </tr>
                                        </thead>
-                                       <tbody>
+                                       <tbody style="color: black;">
                                         <?php
                                         //include('./constant/connect');
 
@@ -302,27 +302,27 @@ $result=$connect->query($sql);
 //print_r($result);exit;
 $no = 1;
 foreach ($result as $row) {
-     
+
 $no+=1;
     ?>
                                         <tr>
                                            <td class="text-center"><?php echo $no ?></td>
-                                                
+
                                             <td class="text-center"><?php echo $row['lead_name'] ?></td>
                                             <td><?php echo $row['phone'] ?></td>
-                                           
-                                               <td><?php echo $row['email'] ?></td> 
-                                               <td><?php echo $row['city'] ?></td> 
-                                    
+
+                                               <td><?php echo $row['email'] ?></td>
+                                               <td><?php echo $row['city'] ?></td>
+
                                              <td><?php echo $row['interest'] ?></td>
                                               <td><?php echo $row['source'] ?></td>
-                                              
-                                           
-                                             
-                                           
-                                            
+
+
+
+
                                         </tr>
-                                     
+
+
                                     </tbody>
                                    <?php    
 }
@@ -335,56 +335,49 @@ $no+=1;
                     </div>
                 </div>
                 </div>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border: none;">
+                        <strong class="card-title">Lead Status Distribution</strong>
+                    </div>
                     <div class="card-body p-4">
-                        <div id="myChart" style="width:100%; max-width:600px; height:450px;"></div>
+                        <div id="myChart" style="width:100%; max-width:600px; height:400px;"></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mb-4">
                 <div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border: none;">
+                        <strong class="card-title">Product Rates Bar Chart</strong>
+                    </div>
                     <div class="card-body p-4">
-                        <div id="myChart1" style="width:100%; max-width:600px; height:450px;"></div>
+                        <div id="myChart1" style="width:100%; max-width:600px; height:400px;"></div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
 
 <?php
 //error_reporting(0);
 //require_once('../constant/connect.php');
- $qqq = "SELECT * FROM product WHERE  status ='1' ";
-$result=$connect->query($qqq);
-//print_r($result);exit;
-$a = '';
-$b = ''; // We will use 0 for quantity, or remove if not needed
-$am = [];
-$amm = [];
-foreach ($result as $row) {
 
-  //print_r($row);
-    $a.=$row["product_name"].',';
-    $b.=$row["rate"].',';
-   
+// Lead status data for charts
+$leadStatuses = [
+    'New Leads' => $countnewlead,
+    'Working Leads' => $countworklead,
+    'Contacted Leads' => $countcontactlead,
+    'Qualified Leads' => $countqualifiedlead,
+    'Failed Leads' => $countfailedlead,
+    'Closed Leads' => $countclosedlead
+];
 
- }
-    $am= explode(",",$a,-1);
-     $amm= explode(",",$b,-1);
-     //print_r($a);
-     //print_r($b);
-
-  $cnt=count($am);
-
-  $datavalue1='';
-                    for($i=0;$i<$cnt;$i++){ 
- $datavalue1.="['".$am[$i]."',".$amm[$i]."],";
-         }
-          //echo 
-
- $datavalue1; //used this $data variable in js
+$datavalue1 = '';
+foreach ($leadStatuses as $status => $count) {
+    $datavalue1 .= "['" . $status . "'," . $count . "],";
+}
+$datavalue1 = rtrim($datavalue1, ','); // Remove trailing comma
 ?>
 
 
@@ -405,17 +398,24 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
-var data = google.visualization.arrayToDataTable([ ['Contry', 'Mhl'],<?php echo $datavalue1;?>]);
+var data = google.visualization.arrayToDataTable([ ['Lead Status', 'Count'],<?php echo $datavalue1;?>]);
 
-var options = {
-  title:'World Wide Wine Production',
-  is3D:true
+var pieOptions = {
+  title:'Lead Status Distribution',
+  is3D:true,
+  colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
 };
 
-var chart = new google.visualization.PieChart(document.getElementById('myChart'));
-  chart.draw(data, options);
+var barOptions = {
+  title:'Lead Status Comparison',
+  colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+  legend: { position: 'none' }
+};
 
-  var chart = new google.visualization.BarChart(document.getElementById('myChart1'));
-  chart.draw(data, options);
+var pieChart = new google.visualization.PieChart(document.getElementById('myChart'));
+  pieChart.draw(data, pieOptions);
+
+  var barChart = new google.visualization.BarChart(document.getElementById('myChart1'));
+  barChart.draw(data, barOptions);
 }
 </script>

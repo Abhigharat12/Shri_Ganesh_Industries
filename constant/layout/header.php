@@ -53,7 +53,7 @@ require_once(__DIR__ . '/../connect.php');
                                       <li><a href="#"><i class="fa fa-user"></i> Add user</a></li>
                                      <?php }?>
                                
-                                    <li><a href="../logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="../constant/logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>

@@ -18,51 +18,7 @@ $result = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 ?>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script>
-$(document).ready(function() {
-    // Client-side validation
-    $('#changePasswordForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var password = $('#password').val().trim();
-        var npassword = $('#npassword').val().trim();
-        var cpassword = $('#cpassword').val().trim();
-
-        if(password === '' || npassword === '' || cpassword === '') {
-            toastr.error('All fields are required');
-            return false;
-        }
-
-        if(npassword !== cpassword) {
-            toastr.error('New password does not match with Confirm password');
-            return false;
-        }
-
-        // AJAX submission
-        $.ajax({
-            url: '../php_action/changePassword.php',
-            type: 'POST',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-                if(response.success) {
-                    toastr.success(response.messages);
-                    setTimeout(function() {
-                        window.location.href = '../constant/logout.php';
-                    }, 2000);
-                } else {
-                    toastr.error(response.messages);
-                }
-            },
-            error: function() {
-                toastr.error('An error occurred. Please try again.');
-            }
-        });
-    });
-});
-</script>
 
 <div class="page-wrapper">
 
@@ -84,7 +40,7 @@ $(document).ready(function() {
                     <div class="card-title"></div>
                     <div class="card-body">
                         <div class="input-states">
-                            <form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
+                            <form action="../php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
                                 <fieldset>
                                     <legend>Change Username</legend>
                                     <div class="changeUsenrameMessages"></div>
@@ -103,7 +59,7 @@ $(document).ready(function() {
                                 </fieldset>
                             </form>
 
-                            <form action="php_action/changePassword.php" method="post" class="form-horizontal" id="changePasswordForm">
+                            <form class="form-horizontal" id="changePasswordForm">
                                 <fieldset>
                                     <legend>Change Password</legend>
                                     <div class="changePasswordMessages"></div>
@@ -133,10 +89,61 @@ $(document).ready(function() {
                                     </div>
                                 </fieldset>
                             </form>
+
+                            <div id="successMessage" style="display: none;" class="alert alert-success text-center">
+                                <h4><i class="fa fa-check-circle"></i> Password Updated Successfully!</h4>
+                                <p>Your password has been changed successfully.</p>
+                                <a href="../dashboard.php" class="btn btn-primary">Go to Dashboard</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 <?php include('../constant/layout/footer.php');?>
+
+<script>
+$(document).ready(function() {
+    // Client-side validation
+    $('#changePasswordForm').on('submit', function(e) {
+        e.preventDefault();
+
+        var password = $('#password').val().trim();
+        var npassword = $('#npassword').val().trim();
+        var cpassword = $('#cpassword').val().trim();
+
+        if(password === '' || npassword === '' || cpassword === '') {
+            toastr.error('All fields are required');
+            return false;
+        }
+
+        if(npassword !== cpassword) {
+            toastr.error('New password does not match with Confirm password');
+            return false;
+        }
+
+        // AJAX submission
+        $.ajax({
+            url: '../php_action/changePassword.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if(response.success) {
+                    // Hide the form
+                    $('#changePasswordForm').hide();
+                    // Show success message with button
+                    $('#successMessage').show();
+                } else {
+                    toastr.error(response.messages);
+                }
+            },
+            error: function() {
+                toastr.error('An error occurred. Please try again.');
+            }
+        });
+    });
+});
+</script>
