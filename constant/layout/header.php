@@ -17,21 +17,18 @@ require_once(__DIR__ . '/../connect.php');
             </marquee>
             <nav class="navbar top-navbar navbar-expand-md navbar-light" style="min-height: 60px; padding: 0 15px;">
 
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+                <div class="navbar-header d-flex justify-content-center align-items-center">
+                    <a class="navbar-brand" href="index.php" style="display: flex; align-items: center; justify-content: center; width: auto;">
                         <img src="../assets/uploadImage/Logo/logo.png" alt="homepage" class="dark-logo" style="max-width:120px; height:auto; padding:3px; border-radius:5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.2);"/>
                     </a>
+                    <a class="nav-link nav-toggler hidden-md-up text-white ml-3" href="javascript:void(0)" style="font-size: 20px;"><i class="mdi mdi-menu"></i></a>
+                    <a class="nav-link sidebartoggler text-muted ml-3" href="javascript:void(0)" style="font-size: 20px;"><i class="ti-menu"></i></a>
                 </div>
-                
+
                 <div class="navbar-collapse">
-                    
-                    <ul class="navbar-nav  mt-md-0">
-                        
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-white  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        
-                      
-                        
+
+                    <ul class="navbar-nav mt-md-0">
+
                     </ul>
                          <marquee behavior="scroll" direction="left" scrollamount="1"><p style="color: white;">
                 <!-- This Project is developed for Academic study purpose only. | Never Sell or Distribute with your Name OR Branding</p> -->
@@ -41,10 +38,9 @@ require_once(__DIR__ . '/../connect.php');
                     </div> -->
                     <ul class="navbar-nav my-lg-0 ml-auto">
 
-                      
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
+                            <a class="nav-link dropdown-toggle text-muted" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
                                 <img src="./assets/uploadImage/Profile/young-woman-avatar-facial-features-stylish-userpic-flat-cartoon-design-elegant-lady-blue-jacket-close-up-portrait-80474088.jpg" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
@@ -52,7 +48,7 @@ require_once(__DIR__ . '/../connect.php');
                                      <li><a href="app/changepassword.php"><i class="fa fa-key"></i> Change Password</a></li>
                                       <li><a href="#"><i class="fa fa-user"></i> Add user</a></li>
                                      <?php }?>
-                               
+
                                     <li><a href="../constant/logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>

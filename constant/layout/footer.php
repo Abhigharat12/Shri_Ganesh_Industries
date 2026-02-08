@@ -9,7 +9,6 @@
 <script src="../assets/js/lib/sweetalert/sweetalert.init.js"></script>
 <script src="../assets/js/scripts.js"></script>
 <script src="../assets/js/lib/datepicker/bootstrap-datepicker.min.js"></script>
-<script src="../assets/js/lib/datepicker/bootstrap-datepicker.init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="../assets/js/lib/html5-editor/wysihtml5-0.3.0.js"></script>
 <script src="../assets/js/lib/html5-editor/bootstrap-wysihtml5.js"></script>

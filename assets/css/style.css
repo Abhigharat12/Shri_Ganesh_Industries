@@ -78,6 +78,9 @@ body {
   overflow-x: hidden;
   color: #67757c;
 }
+.mini-sidebar .hide-menu {
+  display: none;
+}
 html {
   position: relative;
   min-height: 100%;
@@ -193,6 +196,9 @@ h6 {
   }
   .footer {
     left: 240px;
+  }
+  .mini-sidebar .footer {
+    left: 60px;
   }
 }
 @media (max-width: 1023px) {
@@ -1560,7 +1566,7 @@ textarea {
 }
 .sidebar-nav ul li a:hover i {
   /*color: #1976d2;*/
-  #f9fdff;
+  /* #f9fdff; */
 }
 .sidebar-nav ul li a.active {
   color: #242c6d;
@@ -1744,6 +1750,12 @@ textarea {
   }
   .mini-sidebar .left-sidebar {
     width: 60px;
+  }
+  .mini-sidebar .page-wrapper {
+    margin-left: 60px;
+  }
+  .mini-sidebar .footer {
+    left: 60px;
   }
   .mini-sidebar .scroll-sidebar {
     padding-bottom: 0;
@@ -2104,9 +2116,9 @@ textarea {
   stroke-linejoin: round;
   stroke-linecap: round;
   stroke-dasharray: 500%;
-  stroke-dasharray: 0 /;
+  stroke-dasharray: 0 ;
   /* fixes IE prob */
-  stroke-dashoffset: 0 /;
+  stroke-dashoffset: 0 ;
   /* fixes IE prob */
   -webkit-animation: am-draw 40s;
   animation: am-draw 40s;
@@ -5500,7 +5512,6 @@ tbody tr td:last-child {
     border: 7px double #242c6d;
     border-radius: 10px;
 }
-}
 .login-form h4 {
   color: #455a64;
   text-align: center;
@@ -6951,7 +6962,6 @@ tbody tr td:last-child {
 
 .font-weight-semibold {
     font-weight: 600;
-}
 }
 #loginForm .form-control, #loginForm .btn-white{
       border-radius: .25rem;

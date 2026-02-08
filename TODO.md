@@ -1,9 +1,12 @@
-# TODO: Improve New Leads Table UI on Dashboard
+# TODO: Make Dashboard Cards Clickable
 
-## Steps to Complete:
-- [x] Change the "New Leads" card background to a darker gradient for better contrast
-- [x] Set text color to dark for readability
-- [x] Add relevant icons to table headers (e.g., user icon for Lead Name, phone icon for Phone, email icon for Email, etc.)
-- [x] Enhance table styling with borders, padding, and hover effects
-- [x] Ensure table responsiveness
-- [x] Add any necessary styles to custom.css if required
+- [ ] Make Total Leads card clickable (href="lead.php")
+- [ ] Make Total New Leads card clickable (href="new-lead.php")
+- [ ] Make Total Working Leads card clickable (href="working-lead.php")
+- [ ] Make Total Contacted Leads card clickable (href="contact-lead.php")
+- [ ] Make Total Qualified Leads card clickable (href="qualified-lead.php")
+- [ ] Make Total Failed Leads card clickable (href="failed-lead.php")
+- [ ] Make Total Closed Leads card clickable (href="closed-lead.php")
+- [ ] Make High Priority Leads card clickable (href="lead.php")
+- [ ] Make Today’s Follow-ups card clickable (href="lead.php")
+- [ ] Conversion Rate card remains unchanged (no link)
