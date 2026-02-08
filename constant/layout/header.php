@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-include('./constant/check.php');
- require_once('./constant/connect.php');
+include(__DIR__ . '/../check.php');
+require_once(__DIR__ . '/../connect.php');
 ?>
     
     <div id="main-wrapper">
@@ -19,7 +19,7 @@ include('./constant/check.php');
 
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.php" style="display: flex; align-items: center; justify-content: center; width: 100%;">
-                        <b><img src="./assets/uploadImage/Logo/logo.png" alt="homepage" class="dark-logo" style="max-width:120px; height:auto; padding:3px; border-radius:5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.2);"/></b>
+                        <img src="../assets/uploadImage/Logo/logo.png" alt="homepage" class="dark-logo" style="max-width:120px; height:auto; padding:3px; border-radius:5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.2);"/>
                     </a>
                 </div>
                 
@@ -49,11 +49,11 @@ include('./constant/check.php');
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                    <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-                                     <li><a href="#"><i class="fa fa-key"></i> Changed Password</a></li>
+                                     <li><a href="app/changepassword.php"><i class="fa fa-key"></i> Change Password</a></li>
                                       <li><a href="#"><i class="fa fa-user"></i> Add user</a></li>
                                      <?php }?>
                                
-                                    <li><a href="./constant/logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="../logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>

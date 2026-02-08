@@ -55,7 +55,7 @@
    $sql = "SELECT * FROM `lead` where lead_status=1 and status=6";
   $result1 = $connect->query($sql);
   $i=1;
-   while($row = $result1->fetch_array()) {Qualified
+   while($row = $result1->fetch_array()) {
                                     ?>    
                                         <tr>
                                                 

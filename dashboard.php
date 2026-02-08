@@ -53,6 +53,26 @@ $countfailedlead = $leadfailedquery->num_rows;
 $closedleadsql = "SELECT * FROM `lead` WHERE `lead_status` = '1' and status=6";
 $leadclosedquery = $connect->query($closedleadsql);
 $countclosedlead = $leadclosedquery->num_rows;
+
+// High Priority Leads: leads with latest interaction having interest_probability 75% or 100%
+$highPriorityStmt = $connect->prepare("SELECT COUNT(DISTINCT l.id) as count FROM lead l INNER JOIN lead_history lh ON l.id = lh.lead_id WHERE l.lead_status = 1 AND lh.interest_probability IN ('75%', '100%') AND lh.creation_date = (SELECT MAX(creation_date) FROM lead_history WHERE lead_id = l.id)");
+$highPriorityStmt->execute();
+$highPriorityResult = $highPriorityStmt->get_result();
+$highPriorityRow = $highPriorityResult->fetch_assoc();
+$counthighprioritylead = $highPriorityRow['count'] ?? 0;
+$highPriorityStmt->close();
+
+// Today’s Follow-ups: leads with latest interaction having follow_up_date = today and follow_up_status = 'Pending'
+$todaysFollowupsStmt = $connect->prepare("SELECT COUNT(DISTINCT l.id) as count FROM lead l INNER JOIN lead_history lh ON l.id = lh.lead_id WHERE l.lead_status = 1 AND lh.follow_up_date = CURDATE() AND lh.follow_up_status = 'Pending' AND lh.creation_date = (SELECT MAX(creation_date) FROM lead_history WHERE lead_id = l.id)");
+$todaysFollowupsStmt->execute();
+$todaysFollowupsResult = $todaysFollowupsStmt->get_result();
+$todaysFollowupsRow = $todaysFollowupsResult->fetch_assoc();
+$counttodaysfollowups = $todaysFollowupsRow['count'] ?? 0;
+$todaysFollowupsStmt->close();
+
+// Conversion Rate: (Closed Leads / Total Leads) * 100
+$conversionRate = ($countlead > 0) ? round(($countclosedlead / $countlead) * 100, 2) : 0;
+
 //$connect->close();
 
 ?>
@@ -197,11 +217,59 @@ $countclosedlead = $leadclosedquery->num_rows;
                                        <?php }?>
 
                                  <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
-                  
+                    <div class="col-md-3 col-sm-6 dashboard mb-4">
+                        <div class="card dashboard-card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body p-4">
+                                <div class="media widget-ten align-items-center">
+                                    <div class="media-left meida media-middle">
+                                        <span class="icon-bg" style="background: rgba(255,255,255,0.2);"><i class="ti-star text-white"></i></span>
+                                    </div>
+                                    <div class="media-body media-text-right">
+                                        <h2 class="text-white font-weight-bold"><?php echo $counthighprioritylead; ?></h2>
+                                         <a href="lead.php" class="text-decoration-none"><p class="m-b-0 text-white-50 font-weight-semibold">High Priority Leads</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                       <?php }?> <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+                    <div class="col-md-3 col-sm-6 dashboard mb-4">
+                        <div class="card dashboard-card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body p-4">
+                                <div class="media widget-ten align-items-center">
+                                    <div class="media-left meida media-middle">
+                                        <span class="icon-bg" style="background: rgba(255,255,255,0.2);"><i class="ti-calendar text-white"></i></span>
+                                    </div>
+                                    <div class="media-body media-text-right">
+                                        <h2 class="text-white font-weight-bold"><?php echo $counttodaysfollowups; ?></h2>
+                                         <a href="lead.php" class="text-decoration-none"><p class="m-b-0 text-white-50 font-weight-semibold">Today’s Follow-ups</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                       <?php }?> <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+                    <div class="col-md-3 col-sm-6 dashboard mb-4">
+                        <div class="card dashboard-card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="card-body p-4">
+                                <div class="media widget-ten align-items-center">
+                                    <div class="media-left meida media-middle">
+                                        <span class="icon-bg" style="background: rgba(255,255,255,0.2);"><i class="ti-bar-chart text-white"></i></span>
+                                    </div>
+                                    <div class="media-body media-text-right">
+                                        <h2 class="text-white font-weight-bold"><?php echo $conversionRate; ?>%</h2>
+                                         <p class="m-b-0 text-white-50 font-weight-semibold">Conversion Rate</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                       <?php }?> <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
+
                                  <?php }?>
-                   
-                   
-                  
+
+
+
      <div class="col-md-12">
 <div class="card shadow-lg border-0 rounded-lg" style="background: linear-gradient(135deg, #e3e3e6 0%, #ded9e6 100%); color: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease;">
                             <div class="card-header" style="background: linear-gradient(135deg, #7ebdf1 0%, #18a7ef 100%); color: #fff; border: none;">
