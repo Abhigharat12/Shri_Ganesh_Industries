@@ -15,7 +15,7 @@ if($_POST) {
     
     $status = $_POST['status'];
 
-	$sql = "INSERT INTO `lead`(`lead_name`, `phone`, `email`, `city`, `interest`, `source`, `status`) VALUES ('$lead_name', '$phone','$email','$city','$interest','$source','$status')";
+	$sql = "INSERT INTO `lead`(`lead_name`, `phone`, `email`, `city`, `interest`, `source`, `status`, `lead_status`) VALUES ('$lead_name', '$phone','$email','$city','$interest','$source','$status', '1')";
 
 	if($connect->query($sql) === TRUE) {
 	 	$valid['success'] = true;

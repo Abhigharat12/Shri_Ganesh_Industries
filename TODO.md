@@ -10,3 +10,7 @@
 - [ ] Make High Priority Leads card clickable (href="lead.php")
 - [ ] Make Today’s Follow-ups card clickable (href="lead.php")
 - [ ] Conversion Rate card remains unchanged (no link)
+
+# Fixed Issues
+- [x] Fixed leads appearing cleared after PC shutdown - removed redirect in fetchLead.php causing AJAX failure
+- [x] Resolved phpMyAdmin 404 error by stopping IIS and starting XAMPP Apache/MySQL services

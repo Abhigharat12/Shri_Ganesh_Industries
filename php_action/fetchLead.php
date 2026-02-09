@@ -69,7 +69,7 @@ if($result->num_rows > 0) {
  } // /while 
 
 } // if num_rows
-header('location:../Lead.php');
+
 $connect->close();
 
 echo json_encode($output);
