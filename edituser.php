@@ -50,16 +50,36 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Email</label>
+                                                <div class="col-sm-9">
+                                                  <input type="email" name="editEmail" id="editEmail" class="form-control" placeholder="Email" required value="<?php echo $result['email']?>">
+                                                </div>
+                                            </div>
+                                        </div>
                                        <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Password</label>
                                                 <div class="col-sm-9">
-                                                 <input type="password" class="form-control" id="editPassword" placeholder="Password" name="editPassword">
+                                                 <input type="password" class="form-control" id="editPassword" placeholder="Password" name="editPassword" required minlength="6">
                                                 </div>
                                             </div>
                                         </div>
-                                         
-                                        <button type="submit" name="create" id="editProductBtn" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Role</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" id="editRole" name="editRole" required>
+                                                        <option value="user" <?php echo ($result['role'] == 'user') ? 'selected' : ''; ?>>User</option>
+                                                        <option value="admin" <?php echo ($result['role'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" name="create" id="editProductBtn" class="btn btn-primary btn-flat m-b-30 m-t-30">Update User</button>
+                                        <a href="add_user.php" class="btn btn-secondary btn-flat m-b-30 m-t-30 ml-2">Cancel</a>
                                     </form>
                                 </div>
                             </div>

@@ -16,8 +16,10 @@ if($result->num_rows > 0) {
 
  while($row = $result->fetch_array()) {
  	$userid = $row[0];
- 	// active 
+ 	// active
  	$username = $row[1];
+	$password_masked = str_repeat('*', strlen($row[2]));
+	$role = $row[4];
 
  	$button = '
 	<div class="btn-group">
@@ -26,19 +28,21 @@ if($result->num_rows > 0) {
 	  </button>
 	  <ul class="dropdown-menu">
 	    <li><a type="button" data-toggle="modal" id="editUserModalBtn" data-target="#editUserModal" onclick="editUser('.$userid.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeUserModal" id="removeUserModalBtn" onclick="removeUser('.$userid.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a type="button" data-toggle="modal" data-target="#removeUserModal" id="removeUserModalBtn" onclick="removeUser('.$userid.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>
 	  </ul>
 	</div>';
 
-	
 
- 	$output['data'][] = array( 		
+
+ 	$output['data'][] = array(
  		// name
  		$username,
+		$password_masked,
+		$role,
  		// button
- 		$button 		
- 		); 	
- } // /while 
+ 		$button
+ 		);
+ } // /while
 
 }// if num_rows
 header('location:../users.php');

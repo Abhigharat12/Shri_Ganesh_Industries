@@ -1,29 +1,29 @@
-<?php 	
+<?php
 
 require_once 'core.php';
 
-//$valid['success'] = array('success' => false, 'messages' => array());
-$userid = $_GET['id'];
-//echo $userid;exit;
+$valid['success'] = array('success' => false, 'messages' => array());
+
 if($_POST) {
+
+	$userid = $_POST['userid'];
 	$edituserName = $_POST['edituserName'];
-	$editPassword 		= md5($_POST['editPassword']);
-	
-	$sql = "UPDATE users SET username = '$edituserName', password = '$editPassword' WHERE user_id = $userid ";
+	$editPassword = password_hash($_POST['editPassword'], PASSWORD_DEFAULT);
+	$editEmail = $_POST['editEmail'];
+	$editRole = $_POST['editRole'];
+
+	$sql = "UPDATE users SET username = '$edituserName', password = '$editPassword', email = '$editEmail', role = '$editRole' WHERE user_id = $userid ";
 
 	if($connect->query($sql) === TRUE) {
-		$valid['success'] = true;
-		$valid['messages'] = "Successfully Update";	
-		header('location:../users.php');
+		$_SESSION['success'] = "User updated successfully!";
+		header('location:../add_user.php');
 	} else {
-		$valid['success'] = false;
-		$valid['messages'] = "Error while updating product info";
+		$_SESSION['error'] = "Error while updating the user.";
+		header('location:../add_user.php');
 	}
 
-} // /$_POST
-	 
-$connect->close();
+	$connect->close();
 
-echo json_encode($valid);
- 
-?>
+	echo json_encode($valid);
+
+} // /if $_POST

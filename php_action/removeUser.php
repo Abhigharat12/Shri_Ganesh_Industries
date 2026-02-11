@@ -5,20 +5,21 @@ require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-$userid =  $_GET['id'];
+$userid = intval($_GET['id']);
 
-if($userid) { 
+if($userid) {
+    $stmt = $connect->prepare("DELETE FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $userid);
 
- $sql = "DELETE FROM users  WHERE user_id = {$userid}";
+    if($stmt->execute()) {
+        $_SESSION['success'] = "User removed successfully!";
+        header('location:../add_user.php');
+    } else {
+        $_SESSION['error'] = "Error while removing the user.";
+        header('location:../add_user.php');
+    }
 
- if($connect->query($sql) === TRUE) {
- 	$valid['success'] = true;
-	$valid['messages'] = "Successfully Removed";
-	header('location:../Users.php');		
- } else {
- 	$valid['success'] = false;
- 	$valid['messages'] = "Error while remove the user";
- }
+    $stmt->close();
  
  $connect->close();
 

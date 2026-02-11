@@ -32,11 +32,13 @@
                                 <li><a href="../closed-lead.php">Closed</a></li>
                             </ul>
                         </li>
-                       
-                        
 
-    
-                    </ul>   
+                        <li> <a href="../add_user.php" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Users</span></a>
+                        </li>
+
+
+
+                    </ul>
                 </nav>
                 
             </div>

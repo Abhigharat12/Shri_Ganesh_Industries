@@ -4,24 +4,25 @@ require_once 'core.php';
 
 $valid['success'] = array('success' => false, 'messages' => array());
 
-if($_POST) {	
+if($_POST) {
 
-	$userName 		= $_POST['userName'];
-  $upassword 			= md5($_POST['upassword']);
-  $uemail 			= $_POST['uemail'];
+	$userName = $_POST['userName'];
+	$upassword = password_hash($_POST['upassword'], PASSWORD_DEFAULT);
+	$uemail = $_POST['uemail'];
+	$role = isset($_POST['role']) ? $_POST['role'] : 'user';
 
-	
-				$sql = "INSERT INTO users (username, password,email) 
-				VALUES ('$userName', '$upassword' , '$uemail')";
-				//echo $sql;exit;
-				if($connect->query($sql) === TRUE) {
-					$valid['success'] = true;
-					$valid['messages'] = "Successfully Added";	
-					header('location:fetchUser.php');
-				} else {
-					$valid['success'] = false;
-					$valid['messages'] = "Error while adding the members";
-				}
+	$stmt = $connect->prepare("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)");
+	$stmt->bind_param("ssss", $userName, $upassword, $uemail, $role);
+
+	if($stmt->execute()) {
+		$_SESSION['success'] = "User added successfully!";
+		header('location:../add_user.php');
+	} else {
+		$_SESSION['error'] = "Error while adding the user.";
+		header('location:../add_user.php');
+	}
+
+	$stmt->close();
 
 				// /else	
 		

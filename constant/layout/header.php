@@ -46,7 +46,7 @@ require_once(__DIR__ . '/../connect.php');
                                 <ul class="dropdown-user">
                                    <?php if(isset($_SESSION['userId']) && $_SESSION['userId']==1) { ?>
                                      <li><a href="app/changepassword.php"><i class="fa fa-key"></i> Change Password</a></li>
-                                      <li><a href="#"><i class="fa fa-user"></i> Add user</a></li>
+                                      <li><a href="add_user.php"><i class="fa fa-user"></i> Add User</a></li>
                                      <?php }?>
 
                                     <li><a href="../constant/logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
