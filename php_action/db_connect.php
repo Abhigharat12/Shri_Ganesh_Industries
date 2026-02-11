@@ -6,7 +6,7 @@ $password = "";
 $dbname = "jaiganesh_industries";
 $store_url = "http://localhost/jaiganesh_industries";
 // db connection
-$connect = new mysqli($localhost, $username, $password, $dbname);
+$connect = new mysqli($localhost, $username, $password, $dbname, 3307);
 // check connection
 if($connect->connect_error) {
   die("Connection Failed : " . $connect->connect_error);
