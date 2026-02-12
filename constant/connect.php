@@ -5,7 +5,7 @@ $username = "root";
 $password = "";
 $dbname = "jaiganesh_industries";
 // db connection
-$connect = new mysqli($localhost, $username, $password, $dbname, 3307);
+$connect = new mysqli($localhost, $username, $password, $dbname, 3306);
 // check connection
 if($connect->connect_error) {
   die("Connection Failed : " . $connect->connect_error);
