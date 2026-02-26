@@ -1,0 +1,53 @@
+# =========================
+# Composer
+# =========================
+/vendor/
+/composer.lock
+config/google-service-account.json
+
+# If you want to keep composer.lock (recommended for production), 
+# then remove the above composer.lock line.
+
+# =========================
+# Environment Files
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Google Service Account Credentials
+# =========================
+config/google-service-account.json
+google-service-account.json
+*.json
+
+# If you only want to ignore specific JSON file (recommended),
+# then remove *.json and keep only:
+# config/google-service-account.json
+
+# =========================
+# Logs
+# =========================
+/logs/
+/storage/logs/
+/*.log
+
+# =========================
+# Cache & Temporary Files
+# =========================
+/cache/
+/tmp/
+/storage/cache/
+
+# =========================
+# OS Generated Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE Files
+# =========================
+.vscode/
+.idea/

@@ -36,6 +36,13 @@
                         <li> <a href="../add_user.php" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Users</span></a>
                         </li>
 
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-user-plus"></i><span class="hide-menu">Employee Management</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="../add_employee.php">Add Employee</a></li>
+                                <li><a href="../employees.php">Manage Employees</a></li>
+                            </ul>
+                        </li>
+
 
 
                     </ul>

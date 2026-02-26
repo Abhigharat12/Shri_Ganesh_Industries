@@ -73,6 +73,35 @@ $todaysFollowupsStmt->close();
 // Conversion Rate: (Closed Leads / Total Leads) * 100
 $conversionRate = ($countlead > 0) ? round(($countclosedlead / $countlead) * 100, 2) : 0;
 
+// Employee Work Log Statistics
+try {
+    // Total Employees
+    $employeeCountSql = "SELECT COUNT(*) as count FROM employees";
+    $employeeCountResult = $connect->query($employeeCountSql);
+    $employeeCount = $employeeCountResult->num_rows > 0 ? $employeeCountResult->fetch_assoc()['count'] : 0;
+    
+    // Active Employees
+    $activeEmployeeSql = "SELECT COUNT(*) as count FROM employees WHERE status = 'active'";
+    $activeEmployeeResult = $connect->query($activeEmployeeSql);
+    $activeEmployeeCount = $activeEmployeeResult->num_rows > 0 ? $activeEmployeeResult->fetch_assoc()['count'] : 0;
+    
+    // Total Work Hours
+    $totalHoursSql = "SELECT COALESCE(SUM(hours), 0) as total FROM work_logs";
+    $totalHoursResult = $connect->query($totalHoursSql);
+    $totalWorkHours = $totalHoursResult->num_rows > 0 ? $totalHoursResult->fetch_assoc()['total'] : 0;
+    
+    // Total Overtime Hours
+    $totalOvertimeSql = "SELECT COALESCE(SUM(overtime), 0) as total FROM work_logs";
+    $totalOvertimeResult = $connect->query($totalOvertimeSql);
+    $totalOvertimeHours = $totalOvertimeResult->num_rows > 0 ? $totalOvertimeResult->fetch_assoc()['total'] : 0;
+} catch (Exception $e) {
+    // Tables might not exist yet
+    $employeeCount = 0;
+    $activeEmployeeCount = 0;
+    $totalWorkHours = 0;
+    $totalOvertimeHours = 0;
+}
+
 //$connect->close();
 
 ?>
